@@ -1,2 +1,6 @@
 # P11-Greedy-algorithm
-This repository contains the eleven practice of the `Computabilidad y Algoritmia` , this practice consists in  the implementation of the coins exchange algorithm
+This repository contains the eleven practice of the `Computabilidad y Algoritmia` , this practice consists in  the implementation of the coins exchange algorithm.
+
+Name: Samuel.\
+Surname: Martin Morales.\
+Course: Computabilidad y Algoritmia.
