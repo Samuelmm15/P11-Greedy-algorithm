@@ -29,6 +29,6 @@ class coinsExchange {
   private:
     std::vector<float> coins_; /// Este es el conjunto de candidatos de monedas viables.
     float amount_; /// Este es el valor objetivo.
-    std::vector<int> selected_; /// Este es el conjunto de soluciones.
-    std::vector<int> rejected_; /// Este es el conjunto de candidatos rechazados.
+    std::vector<float> selected_; /// Este es el conjunto de soluciones.
+    std::vector<float> rejected_; /// Este es el conjunto de candidatos rechazados.
 };

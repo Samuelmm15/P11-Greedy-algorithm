@@ -14,7 +14,7 @@
 #include "../include/coinsExchange.h"
 
 coinsExchange::coinsExchange() {
-  coins_ = {2, 1, 0.5, 0.20, 0.10, 0.05, 0.02, 0.01};
+  coins_ = {2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01};
   amount_ = 0;
   selected_ = {};
   rejected_ = {};
@@ -29,19 +29,24 @@ bool coinsExchange::FeasibleFunction() {
 };
 
 void coinsExchange::SelectionFunction() {
+//  std::cout << amount_ << std::endl;
   int i = 0;
-  while (amount_ > 0) {
+  while (amount_ > 0.0) {
     if (amount_ >= coins_[i]) {
-      amount_ -= coins_[i];
+      amount_ = amount_ - coins_[i];
+      std::cout << amount_ << std::endl;
       selected_.push_back(coins_[i]);
     } else {
       i++;
+      if (i == coins_.size()) {
+        break;
+      }
     }
   }
 };
 
 bool coinsExchange::ObjectiveFunction() {
-  if (amount_ == 0) {
+  if (amount_ == 0.0) {
     return true;
   } else {
     return false;
@@ -49,32 +54,16 @@ bool coinsExchange::ObjectiveFunction() {
 };
 
 void coinsExchange::SolutionFunction() {
-if (FeasibleFunction()) {
+  if (FeasibleFunction()) {
     SelectionFunction();
     if (ObjectiveFunction()) {
-      std::cout << "El número total de monedas es: " << selected_.size() << std::endl;
+      std::cout << "El número de monedas que se debe de usar es: " << selected_.size() << std::endl;
     } else {
-      std::cout << "No se ha encontrado una solución." << std::endl;
+      SelectionFunction();
     }
   } else {
-    std::cout << "No se ha encontrado una solución." << std::endl;
+    std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida." << std::endl;
   }
-
-//  if (FeasibleFunction()) {
-//    if (ObjectiveFunction()) {
-//      // Print the solution.
-//    } else {
-//      for (int i = 0; i < coins_.size(); i++) {
-//        selected_.push_back(coins_[i]);
-////        rejected_.erase(rejected_.begin() + i);
-////        rejected_.erase(std::find(rejected_.begin(), rejected_.end(), coins_[i]));
-//        SolutionFunction();
-////        selected_.erase(selected_.begin() + i);
-////        selected_.erase(std::find(selected_.begin(), selected_.end(), coins_[i]));
-//        rejected_.push_back(coins_[i]);
-//      }
-//    }
-//  }
 };
 
 void coinsExchange::setAmount(float amount) {
