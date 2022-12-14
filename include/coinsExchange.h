@@ -31,5 +31,4 @@ class coinsExchange {
     float amount_; /// Este es el valor objetivo.
     float addition_; /// Este es el valor de la suma de las monedas seleccionadas.
     std::vector<double> selected_; /// Este es el conjunto de soluciones.
-    std::vector<double> rejected_; /// Este es el conjunto de candidatos rechazados.
 };
