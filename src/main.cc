@@ -23,7 +23,7 @@ int main() {
   std::cout << "Introduzca el valor objetivo, el cual quiere comprobar el número total de monedas: ";
   std::cin >> amount;
   coinsExchange coinsExchangeObject;
-  coinsExchangeObject.SetAmount(amount);
+  coinsExchangeObject.setAmount(static_cast<float>(amount));
   coinsExchangeObject.SolutionFunction();
   return 0;
 }

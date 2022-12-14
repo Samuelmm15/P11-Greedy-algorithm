@@ -20,23 +20,7 @@ coinsExchange::coinsExchange() {
   rejected_ = {};
 }
 
-coinsExchange::SolutionFunction() {
-  if (FeasibleFunction()) {
-    if (ObjectiveFunction()) {
-      // Print the solution.
-    } else {
-      for (int i = 0; i < coins_.size(); i++) {
-        selected_.push_back(coins_[i]);
-        rejected_.erase(coins_[i]);
-        SolutionFunction();
-        selected_.erase(coins_[i]);
-        rejected_.push_back(coins_[i]);
-      }
-    }
-  }
-}
-
-coinsExchange::FeasibleFunction() {
+bool coinsExchange::FeasibleFunction() {
   if (amount_ < 0) {
     return false;
   } else {
@@ -44,7 +28,7 @@ coinsExchange::FeasibleFunction() {
   }
 }
 
-coinsExchange::SelectionFunction() {
+void coinsExchange::SelectionFunction() {
   int i = 0;
   while (amount_ > 0) {
     if (amount_ >= coins_[i]) {
@@ -56,7 +40,7 @@ coinsExchange::SelectionFunction() {
   }
 }
 
-coinsExchange::ObjectiveFunction() {
+bool coinsExchange::ObjectiveFunction() {
   if (amount_ == 0) {
     return true;
   } else {
@@ -64,6 +48,24 @@ coinsExchange::ObjectiveFunction() {
   }
 }
 
-coinsExchange::SetAmount(int amount) {
+void coinsExchange::SolutionFunction() {
+  if (FeasibleFunction()) {
+    if (ObjectiveFunction()) {
+      // Print the solution.
+    } else {
+      for (int i = 0; i < coins_.size(); i++) {
+        selected_.push_back(coins_[i]);
+//        rejected_.erase(rejected_.begin() + i);
+        rejected_.erase(std::find(rejected_.begin(), rejected_.end(), coins_[i]));
+        SolutionFunction();
+//        selected_.erase(selected_.begin() + i);
+        selected_.erase(std::find(selected_.begin(), selected_.end(), coins_[i]));
+        rejected_.push_back(coins_[i]);
+      }
+    }
+  }
+}
+
+void coinsExchange::setAmount(float amount) {
   amount_ = amount;
 }
