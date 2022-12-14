@@ -19,7 +19,7 @@
 
 int main() {
   std::cout << "<< BIENVENIDO AL PROGRAMA DE CAMBIO DE MONEDAS >>" << std::endl;
-  float amount;
+  double amount;
   std::cout << "Introduzca el valor objetivo, el cual quiere comprobar el número total de monedas: ";
   std::cin >> amount;
   coinsExchange coinsExchangeObject;

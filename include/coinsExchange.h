@@ -25,10 +25,11 @@ class coinsExchange {
     bool FeasibleFunction();
     void SelectionFunction();
     bool ObjectiveFunction();
-    void setAmount(float amount);
+    void setAmount(double amount);
   private:
-    std::vector<float> coins_; /// Este es el conjunto de candidatos de monedas viables.
+    std::vector<double> coins_; /// Este es el conjunto de candidatos de monedas viables.
     float amount_; /// Este es el valor objetivo.
-    std::vector<float> selected_; /// Este es el conjunto de soluciones.
-    std::vector<float> rejected_; /// Este es el conjunto de candidatos rechazados.
+    float addition_; /// Este es el valor de la suma de las monedas seleccionadas.
+    std::vector<double> selected_; /// Este es el conjunto de soluciones.
+    std::vector<double> rejected_; /// Este es el conjunto de candidatos rechazados.
 };

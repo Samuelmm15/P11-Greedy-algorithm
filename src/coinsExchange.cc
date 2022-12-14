@@ -18,6 +18,7 @@ coinsExchange::coinsExchange() {
   amount_ = 0;
   selected_ = {};
   rejected_ = {};
+  addition_ = 0;
 };
 
 bool coinsExchange::FeasibleFunction() {
@@ -29,24 +30,16 @@ bool coinsExchange::FeasibleFunction() {
 };
 
 void coinsExchange::SelectionFunction() {
-//  std::cout << amount_ << std::endl;
-  int i = 0;
-  while (amount_ > 0.0) {
-    if (amount_ >= coins_[i]) {
-      amount_ = amount_ - coins_[i];
-      std::cout << amount_ << std::endl;
+  for (int i = 0; i < coins_.size(); i++) {
+    while (addition_ + coins_[i] <= amount_) {
+      addition_ = addition_ + coins_[i];
       selected_.push_back(coins_[i]);
-    } else {
-      i++;
-      if (i == coins_.size()) {
-        break;
-      }
     }
   }
 };
 
 bool coinsExchange::ObjectiveFunction() {
-  if (amount_ == 0.0) {
+  if (addition_ == amount_) {
     return true;
   } else {
     return false;
@@ -59,13 +52,13 @@ void coinsExchange::SolutionFunction() {
     if (ObjectiveFunction()) {
       std::cout << "El número de monedas que se debe de usar es: " << selected_.size() << std::endl;
     } else {
-      SelectionFunction();
+      std::cout << "No se ha encontrado una solución." << std::endl;
     }
   } else {
     std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida." << std::endl;
   }
 };
 
-void coinsExchange::setAmount(float amount) {
+void coinsExchange::setAmount(double amount) {
   amount_ = amount;
 };
