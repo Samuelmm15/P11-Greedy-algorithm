@@ -18,7 +18,7 @@ coinsExchange::coinsExchange() {
   amount_ = 0;
   selected_ = {};
   rejected_ = {};
-}
+};
 
 bool coinsExchange::FeasibleFunction() {
   if (amount_ < 0) {
@@ -26,7 +26,7 @@ bool coinsExchange::FeasibleFunction() {
   } else {
     return true;
   }
-}
+};
 
 void coinsExchange::SelectionFunction() {
   int i = 0;
@@ -38,7 +38,7 @@ void coinsExchange::SelectionFunction() {
       i++;
     }
   }
-}
+};
 
 bool coinsExchange::ObjectiveFunction() {
   if (amount_ == 0) {
@@ -46,26 +46,37 @@ bool coinsExchange::ObjectiveFunction() {
   } else {
     return false;
   }
-}
+};
 
 void coinsExchange::SolutionFunction() {
-  if (FeasibleFunction()) {
+if (FeasibleFunction()) {
+    SelectionFunction();
     if (ObjectiveFunction()) {
-      // Print the solution.
+      std::cout << "El número total de monedas es: " << selected_.size() << std::endl;
     } else {
-      for (int i = 0; i < coins_.size(); i++) {
-        selected_.push_back(coins_[i]);
-//        rejected_.erase(rejected_.begin() + i);
-        rejected_.erase(std::find(rejected_.begin(), rejected_.end(), coins_[i]));
-        SolutionFunction();
-//        selected_.erase(selected_.begin() + i);
-        selected_.erase(std::find(selected_.begin(), selected_.end(), coins_[i]));
-        rejected_.push_back(coins_[i]);
-      }
+      std::cout << "No se ha encontrado una solución." << std::endl;
     }
+  } else {
+    std::cout << "No se ha encontrado una solución." << std::endl;
   }
-}
+
+//  if (FeasibleFunction()) {
+//    if (ObjectiveFunction()) {
+//      // Print the solution.
+//    } else {
+//      for (int i = 0; i < coins_.size(); i++) {
+//        selected_.push_back(coins_[i]);
+////        rejected_.erase(rejected_.begin() + i);
+////        rejected_.erase(std::find(rejected_.begin(), rejected_.end(), coins_[i]));
+//        SolutionFunction();
+////        selected_.erase(selected_.begin() + i);
+////        selected_.erase(std::find(selected_.begin(), selected_.end(), coins_[i]));
+//        rejected_.push_back(coins_[i]);
+//      }
+//    }
+//  }
+};
 
 void coinsExchange::setAmount(float amount) {
   amount_ = amount;
-}
+};
