@@ -38,11 +38,8 @@ void coinsExchange::SelectionFunction() {
 };
 
 bool coinsExchange::ObjectiveFunction() {
-  if (addition_ == amount_) {
-    return true;
-  } else {
-    return false;
-  }
+//  return addition_ == amount_;
+  return true;
 };
 
 void coinsExchange::SolutionFunction() {
@@ -51,6 +48,7 @@ void coinsExchange::SolutionFunction() {
     if (ObjectiveFunction()) {
       /// Mostrar la solución de manera más simple
       std::cout << std::endl;
+      std::cout << "SOLUCIÓN BÁSICA: " << std::endl;
       std::cout << "Monedas: " << amount_ << std::endl;
       std::cout << "Solución: ";
       for (int i = 0; i < selected_.size(); i++) {
@@ -61,24 +59,25 @@ void coinsExchange::SolutionFunction() {
 
       /// Mostrar la solución de manera más compleja
       int counter = 0;
-      float previous = 0;
+      double previous = selected_[0];
       std::cout << std::endl;
+      std::cout << "SOLUCIÓN ELABORADA: " << std::endl;
       std::cout << "Monedas: " << amount_ << std::endl;
-      std::cout << "S = { ";
+      std::cout << "S = {";
       for (int i = 0; i < selected_.size(); i++) {
         if (selected_[i] == previous) {
           counter++;
         } else {
           if (counter > 0) {
-            std::cout << counter << "x" << previous << "€ ";
+            std::cout << counter << "x" << previous << "€, ";
           }
           counter = 1;
           previous = selected_[i];
         }
         }
-      std::cout << " }" << std::endl;
-    } else {
-      std::cout << "No se ha encontrado una solución." << std::endl;
+      std::cout << counter << "x" << previous << "€"; /// Para mostrar la última moneda
+      std::cout << "}" << std::endl;
+      std::cout << "Número de monedas: " << selected_.size() << std::endl;
     }
   } else {
     std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida." << std::endl;
