@@ -22,8 +22,10 @@ class coinsExchange {
   public:
     coinsExchange();
     void SolutionFunction();
+    void SolutionFunctionBills();
     bool FeasibleFunction();
     void SelectionFunction();
+    void SelectionFunctionBills();
     bool ObjectiveFunction();
     void setAmount(double amount);
   private:

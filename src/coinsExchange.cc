@@ -15,7 +15,7 @@
 
 coinsExchange::coinsExchange() {
   coins_ = {2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01};
-  bills_ = {500.0, 200.0, 100.0, 50.0, 20.0, 10.0, 5.0};
+  bills_ = {500.0, 200.0, 100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01};
   amount_ = 0;
   selected_ = {};
   addition_ = 0;
@@ -79,6 +79,57 @@ void coinsExchange::SolutionFunction() {
       std::cout << counter << "x" << previous << "€"; /// Para mostrar la última moneda
       std::cout << "}" << std::endl;
       std::cout << "Número de monedas: " << selected_.size() << std::endl;
+    }
+  } else {
+    std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida." << std::endl;
+  }
+};
+
+void coinsExchange::SelectionFunctionBills() {
+  for (int i = 0; i < bills_.size(); i++) {
+    while (addition_ + bills_[i] <= amount_) {
+      addition_ = addition_ + bills_[i];
+      selected_.push_back(bills_[i]);
+    }
+  }
+};
+
+void coinsExchange::SolutionFunctionBills() {
+  if (FeasibleFunction()) {
+    SelectionFunctionBills();
+    if (ObjectiveFunction()) {
+      /// Mostrar la solución de manera más simple
+      std::cout << std::endl;
+      std::cout << "SOLUCIÓN BÁSICA: " << std::endl;
+      std::cout << "Billetes: " << amount_ << std::endl;
+      std::cout << "Solución: ";
+      for (int i = 0; i < selected_.size(); i++) {
+        std::cout << selected_[i] << "€ ";
+      }
+      std::cout << std::endl;
+      std::cout << "Número de billetes: " << selected_.size() << std::endl;
+
+      /// Mostrar la solución de manera más compleja
+      int counter = 0;
+      double previous = selected_[0];
+      std::cout << std::endl;
+      std::cout << "SOLUCIÓN ELABORADA: " << std::endl;
+      std::cout << "Billetes: " << amount_ << std::endl;
+      std::cout << "S = {";
+      for (int i = 0; i < selected_.size(); i++) {
+        if (selected_[i] == previous) {
+          counter++;
+        } else {
+          if (counter > 0) {
+            std::cout << counter << "x" << previous << "€, ";
+          }
+          counter = 1;
+          previous = selected_[i];
+        }
+        }
+      std::cout << counter << "x" << previous << "€"; /// Para mostrar la última moneda
+      std::cout << "}" << std::endl;
+      std::cout << "Número de billetes: " << selected_.size() << std::endl;
     }
   } else {
     std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida." << std::endl;

@@ -52,7 +52,7 @@ int main(int argc, char const *argv[]) {
       amount = std::stod(argv[2]);
       coinsExchange coinsExchangeObject;
       coinsExchangeObject.setAmount(amount);
-      coinsExchangeObject.SolutionFunction();
+      coinsExchangeObject.SolutionFunctionBills();
       return 0;
     } else if (option == "-o") {
       amount = std::stod(argv[2]);
