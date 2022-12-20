@@ -38,6 +38,15 @@ void coinsExchange::SelectionFunction() {
   }
 };
 
+void coinsExchange::SelectionFunctionBills() {
+  for (int i = 0; i < bills_.size(); i++) {
+    while (addition_ + bills_[i] <= amount_) {
+      addition_ = addition_ + bills_[i];
+      selected_.push_back(bills_[i]);
+    }
+  }
+};
+
 bool coinsExchange::ObjectiveFunction() {
 //  return addition_ == amount_; /// Comprobar por qué no funciona en el caso de probar con que el amount_ es 5.34 y con el resto si
   return true;
@@ -82,15 +91,6 @@ void coinsExchange::SolutionFunction() {
     }
   } else {
     std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida." << std::endl;
-  }
-};
-
-void coinsExchange::SelectionFunctionBills() {
-  for (int i = 0; i < bills_.size(); i++) {
-    while (addition_ + bills_[i] <= amount_) {
-      addition_ = addition_ + bills_[i];
-      selected_.push_back(bills_[i]);
-    }
   }
 };
 

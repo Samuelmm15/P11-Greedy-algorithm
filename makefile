@@ -8,7 +8,7 @@ text5 = clear; make clean; make; clear; ./coinsExchange
 CC=g++
 CXXFLAGS=-g -std=c++14
 
-OBJS = src/main.o src/coinsExchange.o
+OBJS = src/main.o src/coinsExchange.o src/coinsExchangeImprovement.o
 
 all: ${OBJS}
 		@echo $(text0)

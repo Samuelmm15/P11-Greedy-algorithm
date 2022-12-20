@@ -16,6 +16,7 @@
 #include <list>
 
 #include "../include/coinsExchange.h"
+#include "../include/coinsExchangeImprovement.h"
 
 int main(int argc, char const *argv[]) {
   std::cout << "<< BIENVENIDO AL PROGRAMA DE CAMBIO DE MONEDAS >>" << std::endl;
@@ -56,9 +57,9 @@ int main(int argc, char const *argv[]) {
       return 0;
     } else if (option == "-o") {
       amount = std::stod(argv[2]);
-      coinsExchange coinsExchangeObject;
-      coinsExchangeObject.setAmount(amount);
-      coinsExchangeObject.SolutionFunction();
+      coinsExchangeImprovement coinsExchangeImprovementObject;
+      coinsExchangeImprovementObject.setAmount(amount);
+      coinsExchangeImprovementObject.SolutionFunction();
       return 0;
     } else {
       std::cout << "ERROR: El tipo de parámetro introducido no es correcto." << std::endl;
