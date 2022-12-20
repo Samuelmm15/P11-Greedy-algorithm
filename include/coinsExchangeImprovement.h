@@ -12,6 +12,7 @@
  */
 
 #include <iostream>
+#include <set>
 #include <vector>
 #include <list>
 #include <algorithm>
@@ -34,5 +35,5 @@ class coinsExchangeImprovement {
         std::vector<double> bills_; /// Este es el conjunto de candidatos de billetes viables.
         double amount_; /// Este es el valor objetivo.
         double addition_; /// Este es el valor de la suma de las monedas seleccionadas.
-        std::vector<double> selected_; /// Este es el conjunto de soluciones.
+        std::set<double> selected_; /// Este es el conjunto de soluciones.
 };

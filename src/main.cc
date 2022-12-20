@@ -66,6 +66,20 @@ int main(int argc, char const *argv[]) {
       std::cout << "Para más información haga uso de la opción --h o -help" << std::endl;
       return 0;
     }
+  } else if (argc == 4) {
+    std::string option_1 = argv[1];
+    std::string option_2 = argv[3];
+    if (option_1 == "-o" && option_2 == "-b") {
+      amount = std::stod(argv[2]);
+      coinsExchangeImprovement coinsExchangeImprovementObject;
+      coinsExchangeImprovementObject.setAmount(amount);
+      coinsExchangeImprovementObject.SolutionFunctionBills();
+      return 0;
+    }  else {
+      std::cout << "ERROR: El tipo de parámetro introducido no es correcto." << std::endl;
+      std::cout << "Para más información haga uso de la opción --h o -help" << std::endl;
+      return 0;
+    }
   }
   return 0;
 }
