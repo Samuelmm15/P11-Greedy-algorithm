@@ -31,21 +31,24 @@ bool coinsExchangeImprovement::FeasibleFunction() {
 void coinsExchangeImprovement::SelectionFunction() {
     // double auxiliary_amount = amount_;
     // for (int i = 0; i < coins_.size(); i++) {
-    //     double c_value = std::floor((auxiliary_amount) / coins_[i]);
+    //     double c_value = std::floor(auxiliary_amount - addition_ / coins_[i]);
     //     if (c_value > 0) {
     //         selected_.insert(selected_.end(), c_value, coins_[i]);
     //         addition_ = addition_ + c_value * coins_[i];
     //         auxiliary_amount = auxiliary_amount - c_value * coins_[i];
     //     }
     // }
+    double auxiliary_amount = amount_;
     for (double v : coins_) {
-        int c = (amount_ - addition_) / v;
-        std::cout << "c: " << c << std::endl;
+        int c = (auxiliary_amount - addition_) / v;
+        // std::cout << "c: " << c << std::endl;
         if (c > 0) {
             for (int i = 0; i < c; i++) {
+                std::cout << "v: " << v << std::endl;
                 selected_.insert(v);
             }
             addition_ += c * v;
+            // auxiliary_amount -= c * v;
         }
     }
     
@@ -70,7 +73,8 @@ bool coinsExchangeImprovement::ObjectiveFunction() {
 
 void coinsExchangeImprovement::SolutionFunction() {
     if (FeasibleFunction()) {
-    SelectionFunction();
+      SelectionFunction();
+    }
     if (ObjectiveFunction()) {
       std::cout << "SOLUCIÓN BÁSICA: " << std::endl;
       std::cout << "Monedas: " << amount_ << std::endl;
@@ -100,8 +104,7 @@ void coinsExchangeImprovement::SolutionFunction() {
       std::cout << counter << "x" << previous << "€"; /// Para que no salga la coma al final
       std::cout << "}" << std::endl;
       std::cout << "Número de monedas: " << selected_.size() << std::endl;
-    }
-      // /// Mostrar la solución de manera más simple
+      // Mostrar la solución de manera más simple
       // std::cout << std::endl;
       // std::cout << "SOLUCIÓN BÁSICA: " << std::endl;
       // std::cout << "Monedas: " << amount_ << std::endl;
@@ -139,45 +142,45 @@ void coinsExchangeImprovement::SolutionFunction() {
 };
 
 void coinsExchangeImprovement::SolutionFunctionBills() {
-    if (FeasibleFunction()) {
-    SelectionFunctionBills();
-    if (ObjectiveFunction()) {
-      // /// Mostrar la solución de manera más simple
-      // std::cout << std::endl;
-      // std::cout << "SOLUCIÓN BÁSICA: " << std::endl;
-      // std::cout << "Billetes: " << amount_ << std::endl;
-      // std::cout << "Solución: ";
-      // for (int i = 0; i < selected_.size(); i++) {
-      //   std::cout << selected_[i] << "€ ";
-      // }
-      // std::cout << std::endl;
-      // std::cout << "Número de billetes: " << selected_.size() << std::endl;
+  //   if (FeasibleFunction()) {
+  //     SelectionFunctionBills();
+  //   }
+  //   if (ObjectiveFunction()) {
+  //     /// Mostrar la solución de manera más simple
+  //     std::cout << std::endl;
+  //     std::cout << "SOLUCIÓN BÁSICA: " << std::endl;
+  //     std::cout << "Billetes: " << amount_ << std::endl;
+  //     std::cout << "Solución: ";
+  //     for (int i = 0; i < selected_.size(); i++) {
+  //       std::cout << selected_[i] << "€ ";
+  //     }
+  //     std::cout << std::endl;
+  //     std::cout << "Número de billetes: " << selected_.size() << std::endl;
 
-      // /// Mostrar la solución de manera más compleja
-      // int counter = 0;
-      // double previous = selected_[0];
-      // std::cout << std::endl;
-      // std::cout << "SOLUCIÓN ELABORADA: " << std::endl;
-      // std::cout << "Billetes: " << amount_ << std::endl;
-      // std::cout << "S = {";
-      // for (int i = 0; i < selected_.size(); i++) {
-      //   if (selected_[i] == previous) {
-      //     counter++;
-      //   } else {
-      //     if (counter > 0) {
-      //       std::cout << counter << "x" << previous << "€, ";
-      //     }
-      //     counter = 1;
-      //     previous = selected_[i];
-      //   }
-      //   }
-      // std::cout << counter << "x" << previous << "€"; /// Para mostrar el último billete
-      // std::cout << "}" << std::endl;
-      // std::cout << "Número de billetes: " << selected_.size() << std::endl;
-    }
-  } else {
-    std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida." << std::endl;
-  }
+  //     /// Mostrar la solución de manera más compleja
+  //     int counter = 0;
+  //     double previous = selected_[0];
+  //     std::cout << std::endl;
+  //     std::cout << "SOLUCIÓN ELABORADA: " << std::endl;
+  //     std::cout << "Billetes: " << amount_ << std::endl;
+  //     std::cout << "S = {";
+  //     for (int i = 0; i < selected_.size(); i++) {
+  //       if (selected_[i] == previous) {
+  //         counter++;
+  //       } else {
+  //         if (counter > 0) {
+  //           std::cout << counter << "x" << previous << "€, ";
+  //         }
+  //         counter = 1;
+  //         previous = selected_[i];
+  //       }
+  //       }
+  //     std::cout << counter << "x" << previous << "€"; /// Para mostrar el último billete
+  //     std::cout << "}" << std::endl;
+  //     std::cout << "Número de billetes: " << selected_.size() << std::endl;
+  // } else {
+  //   std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida." << std::endl;
+  // }
 };
 
 void coinsExchangeImprovement::setAmount(double amount) {
