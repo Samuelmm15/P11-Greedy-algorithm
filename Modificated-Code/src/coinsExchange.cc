@@ -94,7 +94,7 @@ void coinsExchange::SolutionFunction() {
         std::cout << selected_[i] << "€ ";
       }
       for (int i = 0; i < selected_.size(); i++) {
-        if (selected_[i] < 0.5) {
+        if (selected_[i] <= 0.05) {
           small_coins_counter++;
         }
       }
@@ -149,7 +149,7 @@ void coinsExchange::SolutionFunctionBills() {
         std::cout << selected_[i] << "€ ";
       }
       for (int i = 0; i < selected_.size(); i++) {
-        if (selected_[i] < 0.5) {
+        if (selected_[i] <= 0.05) {
           small_coins_counter++;
         }
       }
