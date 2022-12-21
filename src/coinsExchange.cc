@@ -1,7 +1,8 @@
 /**
  * @file coinsExchange.cc
  * @author Samuel Martín Morales (alu0101359526@ull.edu.es)
- * @brief
+ * @brief This file contains the implementation of the different functions of
+ * the class coinsExchange.
  * @version 0.1
  * @date 2022-12-13
  * @signature Computabilidad y Algoritmia.
@@ -13,14 +14,24 @@
 
 #include "../include/coinsExchange.h"
 
+/**
+ * @brief Construct a new coins Exchange::coins Exchange object
+ *
+ */
 coinsExchange::coinsExchange() {
   coins_ = {2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01};
-  bills_ = {500.0, 200.0, 100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01}; 
+  bills_ = {500.0, 200.0, 100.0, 50.0, 20.0, 10.0, 5.0, 2.0,
+            1.0,   0.5,   0.2,   0.1,  0.05, 0.02, 0.01};
   amount_ = 0;
-  selected_ = {};
   addition_ = 0;
 };
 
+/**
+ * @brief This function checks if the amount is feasible.
+ *
+ * @return true
+ * @return false
+ */
 bool coinsExchange::FeasibleFunction() {
   if (amount_ < 0) {
     return false;
@@ -29,6 +40,11 @@ bool coinsExchange::FeasibleFunction() {
   }
 };
 
+/**
+ * @brief This function selects the coins that are going to be used to make the
+ * change.
+ *
+ */
 void coinsExchange::SelectionFunction() {
   for (int i = 0; i < coins_.size(); i++) {
     while (addition_ + coins_[i] <= amount_) {
@@ -38,6 +54,11 @@ void coinsExchange::SelectionFunction() {
   }
 };
 
+/**
+ * @brief This function selects the bills that are going to be used to make the
+ * change.
+ *
+ */
 void coinsExchange::SelectionFunctionBills() {
   for (int i = 0; i < bills_.size(); i++) {
     while (addition_ + bills_[i] <= amount_) {
@@ -47,16 +68,23 @@ void coinsExchange::SelectionFunctionBills() {
   }
 };
 
-bool coinsExchange::ObjectiveFunction() {
-//  return addition_ == amount_; /// Comprobar por qué no funciona en el caso de probar con que el amount_ es 5.34 y con el resto si
-  return true;
-};
+/**
+ * @brief This function checks the objetive of the operation.
+ *
+ * @return true
+ * @return false
+ */
+bool coinsExchange::ObjectiveFunction() { return true; };
 
+/**
+ * @brief This function gets the solution of the operation.
+ *
+ */
 void coinsExchange::SolutionFunction() {
   if (FeasibleFunction()) {
     SelectionFunction();
     if (ObjectiveFunction()) {
-      /// Mostrar la solución de manera más simple
+      /// @brief This is the basic solution.
       std::cout << std::endl;
       std::cout << "SOLUCIÓN BÁSICA: " << std::endl;
       std::cout << "Monedas: " << amount_ << std::endl;
@@ -67,7 +95,7 @@ void coinsExchange::SolutionFunction() {
       std::cout << std::endl;
       std::cout << "Número de monedas: " << selected_.size() << std::endl;
 
-      /// Mostrar la solución de manera más compleja
+      /// @brief This is the elaborated solution.
       int counter = 0;
       double previous = selected_[0];
       std::cout << std::endl;
@@ -84,13 +112,16 @@ void coinsExchange::SolutionFunction() {
           counter = 1;
           previous = selected_[i];
         }
-        }
-      std::cout << counter << "x" << previous << "€"; /// Para mostrar la última moneda
+      }
+      std::cout << counter << "x" << previous << "€";
       std::cout << "}" << std::endl;
       std::cout << "Número de monedas: " << selected_.size() << std::endl;
+      std::cout << std::endl;
     }
   } else {
-    std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida." << std::endl;
+    std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida."
+              << std::endl;
+    std::cout << std::endl;
   }
 };
 
@@ -98,7 +129,7 @@ void coinsExchange::SolutionFunctionBills() {
   if (FeasibleFunction()) {
     SelectionFunctionBills();
     if (ObjectiveFunction()) {
-      /// Mostrar la solución de manera más simple
+      /// @brief This is the basic solution.
       std::cout << std::endl;
       std::cout << "SOLUCIÓN BÁSICA: " << std::endl;
       std::cout << "Billetes: " << amount_ << std::endl;
@@ -109,7 +140,7 @@ void coinsExchange::SolutionFunctionBills() {
       std::cout << std::endl;
       std::cout << "Número de billetes: " << selected_.size() << std::endl;
 
-      /// Mostrar la solución de manera más compleja
+      /// @brief This is the elaborated solution.
       int counter = 0;
       double previous = selected_[0];
       std::cout << std::endl;
@@ -126,16 +157,17 @@ void coinsExchange::SolutionFunctionBills() {
           counter = 1;
           previous = selected_[i];
         }
-        }
-      std::cout << counter << "x" << previous << "€"; /// Para mostrar la última moneda
+      }
+      std::cout << counter << "x" << previous << "€";
       std::cout << "}" << std::endl;
       std::cout << "Número de billetes: " << selected_.size() << std::endl;
+      std::cout << std::endl;
     }
   } else {
-    std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida." << std::endl;
+    std::cout << "ERROR >> La cantidad de dinero a comprobar no es válida."
+              << std::endl;
+    std::cout << std::endl;
   }
 };
 
-void coinsExchange::setAmount(double amount) {
-  amount_ = amount;
-};
+void coinsExchange::setAmount(double amount) { amount_ = amount; };
